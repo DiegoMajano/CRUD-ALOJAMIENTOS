@@ -5,7 +5,6 @@ $dbname = "bdhai6vihoylt4skgtxu";
 $username = "uf2tsl7fm6fnbepm";
 $password = "VUoe32z9QGUr2TfuDf39";
 
-// Conexión a la base de datos
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -25,65 +24,47 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page de Alojamientos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-        }
-        .accommodation-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #fff;
-            margin: 15px 0;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .accommodation-card img {
-            max-width: 150px;
-            max-height: 100px;
-            margin-right: 20px;
-            border-radius: 4px;
-        }
-        .accommodation-card h3 {
-            margin: 0 0 10px;
-            font-size: 1.5em;
-            color: #333;
-        }
-        .accommodation-card p {
-            margin: 0 0 5px;
-            color: #666;
-        }
-        .accommodation-card .price {
-            font-weight: bold;
-            color: #007BFF;
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Bienvenido a los Alojamientos</h1>
-        <p>Encuentra el mejor lugar para alojarte:</p>
-        <?php foreach ($accommodations as $accommodation): ?>
-            <div class="accommodation-card">
-                <?php if (!empty($accommodation['image_url'])): ?>
-                    <img src="<?= htmlspecialchars($accommodation['image_url']) ?>" alt="<?= htmlspecialchars($accommodation['name']) ?>">
-                <?php endif; ?>
-                <div>
-                    <h3><?= htmlspecialchars($accommodation['name']) ?></h3>
-                    <p><?= htmlspecialchars($accommodation['description']) ?></p>
-                    <p class="price">$<?= number_format($accommodation['price'], 2) ?></p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Bienvenido a los Mejores Alojamientos</h1>
+            <p>Explora y encuentra el lugar ideal para tus viajes</p>
+        </div>
+    </section>
+
+    <!-- Alojamientos Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Nuestros Alojamientos</h2>
+        <div class="row">
+            <?php foreach ($accommodations as $accommodation): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="<?= htmlspecialchars($accommodation['image_url'] ?: 'https://via.placeholder.com/350x200') ?>" 
+                            class="card-img-top" alt="<?= htmlspecialchars($accommodation['name']) ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= htmlspecialchars($accommodation['name']) ?></h5>
+                            <p class="card-text"><?= htmlspecialchars($accommodation['description']) ?></p>
+                            <p class="text-primary fw-bold">$<?= number_format($accommodation['price'], 2) ?></p>
+                            <a href="#" class="btn btn-primary w-100">Más Información</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <?= date('Y') ?> Alojamientos. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
