@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Configuración de la base de datos
 $host = "bdhai6vihoylt4skgtxu-mysql.services.clever-cloud.com";
 $dbname = "bdhai6vihoylt4skgtxu";
@@ -24,6 +25,8 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <title>Landing Page de Alojamientos</title>
     <style>
         body {
@@ -68,9 +71,12 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <body>
+    <?php
+        require_once "./views/menu.php";
+    ?>
     <div class="container">
         <h1>Bienvenido a los Alojamientos</h1>
-        <p>Encuentra el mejor lugar para alojarte:</p>
+        <p>Encuentra el mejor lugar para alojarte:</p>  
         <?php foreach ($accommodations as $accommodation): ?>
             <div class="accommodation-card">
                 <?php if (!empty($accommodation['image_url'])): ?>
@@ -84,6 +90,9 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         <?php endforeach; ?>
     </div>
+    
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
 
