@@ -1,3 +1,6 @@
+<?php
+    require_once "../classes/UserAuth.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +12,8 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/login.css">
+    <!-- Sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Register</title>
 </head>
 
@@ -29,7 +34,7 @@
                             <label for="username" class="form-label">Nombre de usuario</label>
                             <div class="input-group">
                                 <span class="input-group-text">@</span>
-                                <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                                <input type="text" class="form-control" name="userName" placeholder="Username" required>
                             </div>
                         </div>
             
@@ -37,7 +42,7 @@
                             <label for="email" class="form-label">Correo</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                                <input type="email" class="form-control" id="email" placeholder="correo@example.com">
+                                <input type="email" class="form-control" name="email" placeholder="correo@example.com" required>
                             </div>
                         </div>
 
@@ -45,7 +50,7 @@
                             <label for="password" class="form-label">Contraseña</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                <input type="password" class="form-control" id="password" placeholder="Contraseña" required="">
+                                <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
                             </div>
                         </div>
 
@@ -53,7 +58,7 @@
                             <label for="password" class="form-label">Confirmar contraseña</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                <input type="password" class="form-control" id="confirm_password" placeholder="Confirmar Contraseña" required="">
+                                <input type="password" class="form-control" name="confirm_password" placeholder="Confirmar Contraseña" required="">
                             </div>
                         </div>
                     <hr class="my-4">
@@ -62,8 +67,27 @@
             </div>
         </div>
     </section>
+
+    <?php
+        $response = ['status' => '', 'message' => ''];
+        if(isset($_POST['userName'], $_POST['email'], $_POST['password'], $_POST['confirm_password'])){
+            $userName = $_POST['userName'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $confirm_password = $_POST['confirm_password'];
+
+            $response = UsersAuth::register($userName, $email, $password, $confirm_password);
+        }
+    ?>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        let registerStatus = '<?php echo $response["status"]; ?>';
+        let registerMessage = '<?php echo $response["message"]; ?>';
+    </script>
+    <script src="../assets/js/register_alert.js"></script>
 </body>
 
 </html>

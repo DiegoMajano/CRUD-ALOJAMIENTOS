@@ -6,7 +6,7 @@
             $conection = Connection::connect();
 
             if(!isset($name, $email, $password)){
-                return "Por favor ingrese un nombre, un correo y una contraseña";
+                return ['status' => 'error', 'message' => 'Por favor ingrese un nombre, correo y contraseña'];
                 exit;
             }
 
@@ -15,12 +15,12 @@
             $query->execute();
 
             if($query->rowCount() > 0){
-                return "El correo ya esta registrado";
+                return ['status' => 'error', 'message' => 'El correo ya esta registrado'];
                 exit;
             }
 
             if($password != $confirm_password){
-                return "Las contraseñas no coinciden";
+                return ['status' => 'error', 'message' => 'Las contraseñas no coinciden'];
                 exit;
             }
 
@@ -32,7 +32,7 @@
             $query->bindParam(':password', $password);
             $query->execute();
 
-            return "Usuario registrado correctamente";
+            return ['status' => 'success', 'message' => 'Usuario registrado correctamente'];
         }
 
         public static function login($email, $password){
@@ -55,7 +55,7 @@
                     $_SESSION['user'] = $user['name'];
 
                     //redirigir a la pagina de inicio con js
-                    //echo "<script>window.location.replace('../index(landing_page).php')</script>";
+                    echo "<script>window.location.replace('../index(landing_page).php')</script>";
                 } else {
                     return "Credenciales Incorrectas password";
                 }
@@ -68,7 +68,7 @@
             session_start();
             session_destroy();
             session_unset();
-            header("location: ../index(landing_page).php");
+            header("location: ../views/login.php");
             exit;
         }
 

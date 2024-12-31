@@ -22,9 +22,9 @@
     <?php
         require_once "./menu.php";
     ?>
-    <section class="background_login">
+    <section class="bg-light py-5">
         <div class="container">
-            <div class="row d-flex justify-content-center align-items-center vh-100">
+            <div class="row d-flex justify-content-center align-items-center ">
                 <div class="col-12 col-md-6 col-lg-5 col-xl-5">
                     <div class="card bg-dark text-white login">
                         <div class="card-body px-4 py-4 text-center">
@@ -64,7 +64,9 @@
                                     <i class="bi bi-question-circle-fill"></i>
                                     ¿No tienes una cuenta?
                                 </span>
-                                <p class="mb-0"><a href="#" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Registrarse</a></p>
+                                <p class="mb-0">
+                                    <a href="./register.php" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Registrarse</a>
+                                </p>
                             </div>
                         </div>
                     </div>
