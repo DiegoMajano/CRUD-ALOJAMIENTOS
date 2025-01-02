@@ -91,23 +91,39 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Registra un Alojamiento</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Nombre Hotel</label>
-                            <input class="form-control" name="name">
+                            <input class="form-control" name="name" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Descripción</label>
-                            <textarea class="form-control" name="description"></textarea>
+                            <textarea class="form-control" name="description" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Precio</label>
-                            <input class="form-control" name="price">
+                            <input class="form-control" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Usuarios</label>
+                            <select class="form-select" name="idUser" required>
+                                <option selected disabled value="">Selecciona una opción</option>
+                                <?php
+                                    $info = AdminAccommodation::getUsers();
+                                    if (is_array($info)) {
+                                        foreach ($info as $inf) {
+                                            echo "<option value=".$inf['id_user'].">".$inf['name']."</option>";
+                                        }
+                                    } else {
+                                        echo "<caption>Aún no hay alojamientos</caption>";
+                                    }
+                                ?>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Imagen</label>
-                            <input class="form-control" name="image_url">
+                            <input type="file" name="image" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -119,15 +135,17 @@
             </div>
         </div>
         <?php
-            if(isset($_POST['name'], $_POST['description'], $_POST['price'], $_POST['image_url'],)){
+
+            if (isset($_POST['name'], $_POST['description'], $_POST['price'], $_FILES['image'], $_POST['idUser'])) {
                 $name = $_POST['name'];
                 $description = $_POST['description'];
                 $price = $_POST['price'];
-                $image_url = $_POST['image_url'];
-            
-                $result = AdminAccommodation::addAccommodation($name, $description, $price, $image_url);
+                $imageFile = $_FILES['image'];
+                $idUser = $_POST['idUser'];
+                $result = AdminAccommodation::addAccommodation($name, $description, $price, $imageFile, $idUser);
                 echo "<p>$result</p>";
             }
+            
         ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
