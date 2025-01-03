@@ -1,5 +1,5 @@
 <?php
-    require_once "../classes/Connection.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/CRUD-ALOJAMIENTOS/classes/Connection.php";
 
     class UsersAuth {
         public static function register($name, $email, $password, $confirm_password){
@@ -43,7 +43,7 @@
                 exit;
             }
 
-            $query = $conection->prepare("SELECT id_user, name, email, password FROM users WHERE email = :email");
+            $query = $conection->prepare("SELECT id_user, name, email, password, id_role FROM users WHERE email = :email");
             $query->bindParam(':email', $email);
             $query->execute();
 
@@ -53,9 +53,10 @@
                 if(password_verify($password, $user['password'])){
                     $_SESSION['id_user'] = $user['id_user'];
                     $_SESSION['user'] = $user['name'];
+                    $_SESSION['id_role'] = $user['id_role'];
 
                     //redirigir a la pagina de inicio con js
-                    echo "<script>window.location.replace('../index(landing_page).php')</script>";
+                    echo "<script>window.location.replace('../index.php')</script>";
                 } else {
                     return "Credenciales Incorrectas password";
                 }
@@ -79,6 +80,18 @@
                 header("location: ../views/login.php?error=Debes iniciar sesion");
                 exit;
             }
+        }
+
+        public static function menuOptions($id_role) {
+            $conection = Connection::connect();
+
+            $query = $conection->prepare("SELECT r.name, m.option_name, m.route_url FROM roles r JOIN privileges p ON r.id_role = p.id_role JOIN menus m ON p.id_menu = m.id_menu WHERE r.id_role = :id_role");
+            $query->bindParam(':id_role', $id_role);
+            $query->execute();
+
+            $response = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $response;
         }
     }
 ?>
