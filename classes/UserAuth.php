@@ -56,7 +56,7 @@
                     $_SESSION['id_role'] = $user['id_role'];
 
                     //redirigir a la pagina de inicio con js
-                    echo "<script>window.location.replace('../index.php')</script>";
+                    echo "<script>window.location.replace('../views/user.php')</script>";
                 } else {
                     return "Credenciales Incorrectas password";
                 }
@@ -93,5 +93,23 @@
 
             return $response;
         }
+
+        public static function getAccomodation($id_user) {
+            $conection = Connection::connect();
+
+            $sql = "SELECT a.id_accommodation, a.name, a.description, a.price, a.image_url
+                    FROM accommodations a
+                    JOIN user_accommodation ua ON a.id_accommodation = ua.id_accommodation
+                    WHERE ua.id_user = :id_user";
+
+            $stmt = $conection-> prepare($sql);
+            $stmt->bindParam('id_user',$id_user, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $response;
+        }
+
     }
 ?>
