@@ -29,7 +29,7 @@
                     <img src="/CRUD-ALOJAMIENTOS/assets/images/usuario_menu.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">Mi Cuenta</a></li>
+                    <li><a class="dropdown-item" href="/CRUD-ALOJAMIENTOS/views/user.php">Mi Cuenta</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
