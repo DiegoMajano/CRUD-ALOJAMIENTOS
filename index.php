@@ -69,6 +69,9 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
             color: #007BFF;
         }
     </style>
+
+    <!-- Agregando el favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/alojamiento.png" />
 </head>
 <body>
     <?php

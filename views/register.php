@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="../assets/css/login.css">
     <!-- Sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Register</title>
+
+    <!-- Agregando el favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/alojamiento.png" />
+    <title>Registro</title>
 </head>
 
 <body class="bg-light">

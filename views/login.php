@@ -16,6 +16,9 @@
 
     <!-- Sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Agregando el favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/alojamiento.png" />
     <title>Login</title>
 </head>
 <body>
