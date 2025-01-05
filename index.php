@@ -1,3 +1,4 @@
+<?php require_once "classes/AdminDashboard.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,13 +30,13 @@
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
 				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="bi bi-house pe-none me-2 active" width="16" height="16"></i>
+					<a href="#" class="nav-link active">
+						<i class="bi bi-house pe-none me-2" width="16" height="16"></i>
 						<span>Inicio</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="views/accommodations.php" class="nav-link">
 						<i class="bi bi-clipboard pe-none me-2" width="16" height="16"></i>
 						<span>Alojamientos</span>
 					</a>
@@ -77,11 +78,13 @@
 			</div>
 		</div>
 		<!--sidebar-->
+        
+        <!--DIV PRINCIPAL-->
 		<div class="div-main">
 			<div class="banner">
 				<div class="content">
 					<h1>Bienvenido Administrador:</h1>
-					<p>nombre usuario</p>
+					<p>__nombre__usuario__</p>
 				</div>
 			</div>
 			<div class="row mt-3">
@@ -90,7 +93,10 @@
 						<i class="material-icons card-icon icono1">checklist</i>
 						<div class="card-content">
 							<h5 class="card-title">Total de Alojamientos</h5>
-							<p class="card-text">10</p>
+                            <?php
+                                $total = AdminDashboard::getTotalAccommodations();
+                                echo "<p class='card-text'>$total</p>";
+                            ?>
 						</div>
 					</div>
 				</div>
@@ -99,7 +105,10 @@
 						<i class="material-icons card-icon icono2">history</i>
 						<div class="card-content">
 							<h5 class="card-title">Alojamientos Agregados Hoy</h5>
-							<p class="card-text">5</p>
+                            <?php
+                                $today = AdminDashboard::getAccommodationsAddedToday();
+                                echo "<p class='card-text'>$today</p>";
+                            ?>
 						</div>
 					</div>
 				</div>
@@ -108,13 +117,22 @@
 						<i class="material-icons card-icon icono3">favorite</i>
 						<div class="card-content">
 							<h5 class="card-title">Alojamientos Más Populares</h5>
-							<p class="card-text">Hotel Paraíso</p>
+                            <?php
+                                $popular = AdminDashboard::getPopularAccommodations();
+                                if (is_array($popular)) {
+                                    foreach ($popular as $accommodation) {
+                                        echo "<p class='card-text'>".htmlspecialchars($accommodation['name'])."</p>";
+                                    }
+                                } else {
+                                    echo "<p>Error: " . htmlspecialchars($popular) . "</p>";
+                                }
+                            ?>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	
+        <!--DIV PRINCIPAL-->
 	</main>
 	<script src="./assets/js/script.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

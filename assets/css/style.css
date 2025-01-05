@@ -10,7 +10,7 @@
     --color-sidebar-hover:rgb(238,238,238);
     --color-text-sidebar-hover:rgb(0,0,0);
 
-    --color-brand:rgba(163, 163, 163, 0.987);
+    --color-brand:rgba(57, 57, 57, 0.987);
 
     --color-boton:rgb(0,0,0);
     --color-boton-texto:rgb(255,255,255);
@@ -67,6 +67,17 @@ body{
     font-weight: 500;
 }
 
+.sidebar a{
+    margin-bottom: 5px;
+}
+
+.sidebar .nav a:hover,
+.sidebar .nav a.active{
+    background-color: var(--color-sidebar-hover) !important;
+    color: var(--color-text-sidebar-hover) !important;
+}
+
+
 #logo{
     min-width: 35px;
     width: 25px;
@@ -79,9 +90,6 @@ span.name{
     color: var(--color-text) !important;
     align-items: center;
     cursor: pointer;
-}
-
-span.name {
     position: relative;
     display: inline-block;
     margin-bottom: 5px;
@@ -171,9 +179,9 @@ span.name::after {
     font-size: 20px;
     color: #666;
 }
-.icono1 { background-color: rgba(176, 84, 233, 0.859); color: rgba(71, 2, 114, 0.859);}
-.icono2 { background-color: rgba(84, 131, 233, 0.859); color: rgba(0, 40, 127, 0.859);}
-.icono3 { background-color: rgba(84, 208, 233, 0.859); color: rgba(1, 101, 120, 0.859);}
+.icono1 { background-color: rgba(228, 198, 246, 0.859); color: rgba(71, 2, 114, 0.859);}
+.icono2 { background-color: rgba(197, 214, 250, 0.859); color: rgba(0, 40, 127, 0.859);}
+.icono3 { background-color: rgba(195, 238, 247, 0.859); color: rgba(1, 101, 120, 0.859);}
 
 
 

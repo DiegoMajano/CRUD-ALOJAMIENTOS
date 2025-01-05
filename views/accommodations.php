@@ -32,13 +32,13 @@
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
 				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="bi bi-house pe-none me-2 active" width="16" height="16"></i>
+					<a href="../index.php" class="nav-link">
+						<i class="bi bi-house pe-none me-2" width="16" height="16"></i>
 						<span>Inicio</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="#" class="nav-link active">
 						<i class="bi bi-clipboard pe-none me-2" width="16" height="16"></i>
 						<span>Alojamientos</span>
 					</a>
@@ -80,9 +80,9 @@
 			</div>
 		</div>
         <!--sidebar-->
+        <!--DIV PRINCIPAL-->
 		<div class="div-main">
-            
-            <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Alojamiento</button>
+            <button type="button" class="btn btn-dark mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Alojamiento</button>
             <div class="table-responsive">
                 <table class="table table-striped table-hover" id="accommodationTable">
                     <thead class="table-dark">
@@ -133,7 +133,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Precio</label>
-                                <input class="form-control" name="price" required>
+                                <input type="number" class="form-control" name="price" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Usuarios</label>
@@ -158,12 +158,13 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-dark">Guardar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <!--DIV PRINCIPAL-->
         <?php
             if (isset($_POST['name'], $_POST['description'], $_POST['price'], $_FILES['image'], $_POST['idUser'])) {
                 $name = $_POST['name'];
@@ -193,6 +194,23 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "emptyTable": "No hay datos disponibles en la tabla"
+                }
             });
         });
     </script>
