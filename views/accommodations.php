@@ -1,4 +1,11 @@
-<?php require_once "../classes/AdminAccommodation.php"; ?>
+<?php
+    session_start();
+    if (!isset($_SESSION['id_user']) || $_SESSION['id_role'] != 1) {
+        header("location: ./views/login.php");
+        exit;
+    }
+    require_once "../classes/AdminAccommodation.php"; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +39,7 @@
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
 				<li class="nav-item">
-					<a href="../index.php" class="nav-link">
+					<a href="../index_admin.php" class="nav-link">
 						<i class="bi bi-house pe-none me-2" width="16" height="16"></i>
 						<span>Inicio</span>
 					</a>
@@ -66,16 +73,16 @@
 			<div class="dropdown">
 				<a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
 					data-bs-toggle="dropdown" aria-expanded="false">
-					<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+					<img src="../assets/images/usuario_menu.png" alt="" width="32" height="32" class="rounded-circle me-2">
 					<strong>Opciones</strong>
 				</a>
 				<ul class="dropdown-menu text-small shadow">
 					<li><a class="dropdown-item" href="#">Ajustes</a></li>
-					<li><a class="dropdown-item" href="#">Perfil</a></li>
+					<li><a class="dropdown-item" href="../views/user.php">Perfil</a></li>
 					<li>
 						<hr class="dropdown-divider">
 					</li>
-					<li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+					<li><a class="dropdown-item" href="../src/logout.php">Cerrar Sesión</a></li>
 				</ul>
 			</div>
 		</div>

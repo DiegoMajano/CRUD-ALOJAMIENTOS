@@ -55,8 +55,12 @@
                     $_SESSION['user'] = $user['name'];
                     $_SESSION['id_role'] = $user['id_role'];
 
-                    //redirigir a la pagina de inicio con js
-                    echo "<script>window.location.replace('../views/user.php')</script>";
+                    //redirigir a la pagina de inicio
+                    if($user['id_role'] == 1){
+                        echo "<script>window.location.replace('../index_admin.php')</script>";
+                    } else {
+                        echo "<script>window.location.replace('../views/user.php')</script>";
+                    }
                 } else {
                     return "Credenciales Incorrectas password";
                 }

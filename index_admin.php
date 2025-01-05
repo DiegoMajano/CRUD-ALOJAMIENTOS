@@ -1,4 +1,11 @@
-<?php require_once "classes/AdminDashboard.php"; ?>
+<?php
+    session_start();
+    if (!isset($_SESSION['id_user']) || $_SESSION['id_role'] != 1) {
+        header("location: ./views/login.php");
+        exit;
+    }
+    require_once "classes/AdminDashboard.php"; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,16 +71,16 @@
 			<div class="dropdown">
 				<a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
 					data-bs-toggle="dropdown" aria-expanded="false">
-					<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+					<img src="./assets/images/usuario_menu.png" alt="" width="32" height="32" class="rounded-circle me-2">
 					<strong>Opciones</strong>
 				</a>
 				<ul class="dropdown-menu text-small shadow">
 					<li><a class="dropdown-item" href="#">Ajustes</a></li>
-					<li><a class="dropdown-item" href="#">Perfil</a></li>
+					<li><a class="dropdown-item" href="./views/user.php">Perfil</a></li>
 					<li>
 						<hr class="dropdown-divider">
 					</li>
-					<li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+					<li><a class="dropdown-item" href="./src/logout.php">Cerrar Sesión</a></li>
 				</ul>
 			</div>
 		</div>
@@ -84,7 +91,7 @@
 			<div class="banner">
 				<div class="content">
 					<h1>Bienvenido Administrador:</h1>
-					<p>__nombre__usuario__</p>
+					<h2><?php echo $_SESSION['user']; ?></h2>
 				</div>
 			</div>
 			<div class="row mt-3">
