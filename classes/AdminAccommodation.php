@@ -1,6 +1,6 @@
 <?php
 
-    require_once './classes/Connection.php';
+    require_once '../classes/Connection.php';
     //PRIMERO DEBO GUARDAR LA IMAGEN, DESPUES OBTENER EL URL, DESPUES GUARDAR EL ALOJAMIENTO, DESPUES OBTENER EL ID DEL ALOJAMIENTO, DESPUES ALMACENAR EN USER_ACCOMMODOTION
 
     class AdminAccommodation {
