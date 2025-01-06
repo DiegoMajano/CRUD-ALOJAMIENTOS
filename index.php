@@ -102,12 +102,12 @@
 				</div>
 				<div class="col-lg-4">
 					<div class="card-custom">
-						<i class="material-icons card-icon icono2">history</i>
+						<i class="material-icons card-icon icono2">attach_money</i>
 						<div class="card-content">
-							<h5 class="card-title">Alojamientos Agregados Hoy</h5>
+							<h5 class="card-title">Alojamientos de $50 a $100</h5>
                             <?php
-                                $today = AdminDashboard::getAccommodationsAddedToday();
-                                echo "<p class='card-text'>$today</p>";
+                                $total = AdminDashboard::getAccommodationByPriceRange();
+                                echo "<p class='card-text'>$total</p>";
                             ?>
 						</div>
 					</div>
