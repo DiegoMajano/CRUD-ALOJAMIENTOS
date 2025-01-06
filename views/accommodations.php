@@ -136,22 +136,6 @@
                                 <input type="number" class="form-control" name="price" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Usuarios</label>
-                                <select class="form-select" name="idUser" required>
-                                    <option selected disabled value="">Selecciona una opción</option>
-                                    <?php
-                                        $info = AdminAccommodation::getUsers();
-                                        if (is_array($info)) {
-                                            foreach ($info as $inf) {
-                                                echo "<option value=".$inf['id_user'].">".$inf['name']."</option>";
-                                            }
-                                        } else {
-                                            echo "<tr><td colspan='5'>Aún no hay usuarios</td></tr>";
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
                                 <label class="form-label">Imagen</label>
                                 <input type="file" name="image" required>
                             </div>
@@ -166,13 +150,12 @@
         </div>
         <!--DIV PRINCIPAL-->
         <?php
-            if (isset($_POST['name'], $_POST['description'], $_POST['price'], $_FILES['image'], $_POST['idUser'])) {
+            if (isset($_POST['name'], $_POST['description'], $_POST['price'], $_FILES['image'])) {
                 $name = $_POST['name'];
                 $description = $_POST['description'];
                 $price = $_POST['price'];
                 $imageFile = $_FILES['image'];
-                $idUser = $_POST['idUser'];
-                $result = AdminAccommodation::addAccommodation($name, $description, $price, $imageFile, $idUser);
+                $result = AdminAccommodation::addAccommodation($name, $description, $price, $imageFile);
                 echo "<p>$result</p>";
             }
         ?>
