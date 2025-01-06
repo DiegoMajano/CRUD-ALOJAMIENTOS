@@ -18,6 +18,20 @@
             }
         }
 
+        public static function getAccommodationByPriceRange() {
+            $connection = Connection::connect();
+        
+            try {
+                $query = $connection->prepare("SELECT COUNT(*) AS count_in_range FROM accommodations WHERE price BETWEEN 50 AND 100;");
+                $query->execute();
+        
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+                return $result['count_in_range'];
+            } catch (Exception $e) {
+                return "Error: " . $e->getMessage();
+            }
+        }
+
         public static function getAccommodationsAddedToday() {
             $connection = Connection::connect();
         

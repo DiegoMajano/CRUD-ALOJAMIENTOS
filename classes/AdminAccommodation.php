@@ -1,7 +1,6 @@
 <?php
 
     require_once '../classes/Connection.php';
-    //PRIMERO DEBO GUARDAR LA IMAGEN, DESPUES OBTENER EL URL, DESPUES GUARDAR EL ALOJAMIENTO, DESPUES OBTENER EL ID DEL ALOJAMIENTO, DESPUES ALMACENAR EN USER_ACCOMMODOTION
 
     class AdminAccommodation {
 
@@ -57,7 +56,7 @@
             }
         }
 
-        public static function addAccommodation($name, $description, $price, $imageFile, $id_user)
+        public static function addAccommodation($name, $description, $price, $imageFile)
         {
             $uploadResponse = self::uploadImage($imageFile);
 
@@ -77,51 +76,12 @@
                 $query->bindParam(':image_url', $image_url);
 
                 if ($query->execute()) {
-                    $generatedId = $connection->lastInsertId();
-                    $result = self::addUserAccommodation($id_user, $generatedId);
-                    return $result;
-                    //return "Alojamiento agregado correctamente.".$generatedId;
+                    return "Alojamiento agregado correctamente.";
                 } else {
                     return "Error al agregar el alojamiento.";
                 }
             } catch (Exception $e) {
                 return "Error: " . $e->getMessage();
-            }
-        }
-
-        public static function addUserAccommodation($id_user, $id_accommodation)
-        {
-            date_default_timezone_set('America/El_Salvador');
-            $created_at = date('Y-m-d');
-            
-            $connection = Connection::connect();
-
-            try {
-                $query = $connection->prepare("INSERT INTO user_accommodation (id_user, id_accommodation, created_at) VALUES (:id_user, :id_accommodation, :created_at)");
-                $query->bindParam(':id_user', $id_user);
-                $query->bindParam(':id_accommodation', $id_accommodation);
-                $query->bindParam(':created_at', $created_at);
-
-                if ($query->execute()) {
-                    return "Alojamiento agregado correctamente.";
-                } else {
-                    return "Error al agregar el alojamiento con el usuario";
-                }
-            } catch (Exception $e) {
-                return "Error: " . $e->getMessage();
-            }
-        }
-
-        public static function getUsers(){
-            $connection = Connection::connect();
-            try {
-                $query = $connection->prepare("SELECT name, id_user FROM users WHERE id_role = 1");
-                $query->execute();
-
-                $info = $query->fetchAll(PDO::FETCH_ASSOC);
-                return $info;
-            } catch (Exception $e) {
-                return "Error" . $e->getMessage();
             }
         }
 
