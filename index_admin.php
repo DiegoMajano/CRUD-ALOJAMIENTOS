@@ -48,7 +48,7 @@
 						<span>Alojamientos</span>
 					</a>
 				</li>
-				<li>
+<!-- 				<li>
 					<a href="#" class="nav-link link-body-emphasis">
 						<i class="bi bi-bar-chart pe-none me-2" width="16" height="16"></i>
 						<span>Análisis</span>
@@ -65,7 +65,7 @@
 						<i class="bi bi-gear pe-none me-2" width="16" height="16"></i>
 						<span>Ajustes</span>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 			<hr>
 			<div class="dropdown">
@@ -75,7 +75,7 @@
 					<strong>Opciones</strong>
 				</a>
 				<ul class="dropdown-menu text-small shadow">
-					<li><a class="dropdown-item" href="#">Ajustes</a></li>
+					<!-- <li><a class="dropdown-item" href="#">Ajustes</a></li> -->
 					<li><a class="dropdown-item" href="./views/user.php">Perfil</a></li>
 					<li>
 						<hr class="dropdown-divider">
