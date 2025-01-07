@@ -28,6 +28,8 @@ $accommodations = UsersAuth::getAccomodation($id_user)
 
     <!-- Agregando el favicon -->
     <link rel="icon" type="image/png" href="../assets/images/alojamiento.png" />
+
+    <link rel="stylesheet" href="../assets/css/styles.css">
     <title>User view</title>
 </head>
 
@@ -62,6 +64,10 @@ $accommodations = UsersAuth::getAccomodation($id_user)
         ?>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <?= date('Y') ?> Alojamientos. Todos los derechos reservados.</p>
+    </footer>
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
