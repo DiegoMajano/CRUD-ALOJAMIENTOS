@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Configuración de la base de datos
 $host = "bdhai6vihoylt4skgtxu-mysql.services.clever-cloud.com";
 $dbname = "bdhai6vihoylt4skgtxu";
@@ -25,11 +26,16 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page de Alojamientos</title>
     <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="./assets/css/styles.css" rel="stylesheet">
+    <!-- Agregando el favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/alojamiento.png" />
 </head>
-<body>
+<body class="bg-light">
+    <?php
+        include_once "./views/menu.php";
+    ?>
     <!-- Hero Section -->
     <section class="hero">
         <div>
@@ -51,7 +57,14 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <h5 class="card-title"><?= htmlspecialchars($accommodation['name']) ?></h5>
                             <p class="card-text"><?= htmlspecialchars($accommodation['description']) ?></p>
                             <p class="text-primary fw-bold">$<?= number_format($accommodation['price'], 2) ?></p>
-                            <a href="#" class="btn btn-primary w-100">Más Información</a>
+                            <?php
+                                if (isset($_SESSION['user_id'])) {
+                            ?>
+                            <a href="#" class="btn btn-primary w-100">Agregar a mi cuenta</a>
+                            <?php
+                                } 
+                            ?>
+
                         </div>
                     </div>
                 </div>
@@ -65,6 +78,6 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 
     <!-- Bootstrap JS -->
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

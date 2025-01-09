@@ -1,0 +1,53 @@
+.hero {
+    background: url('https://res.cloudinary.com/ddnkevlzw/image/upload/v1736390267/accommodationBackgroundjpg_ynkzs1.jpg') center/cover no-repeat;
+    height: 60vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 1;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.hero h1, .hero p {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+.hero p {
+    font-size: 1.25rem;
+    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card {
+    transition: transform 0.5s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
