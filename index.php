@@ -6,6 +6,8 @@ $dbname = "bdhai6vihoylt4skgtxu";
 $username = "uf2tsl7fm6fnbepm";
 $password = "VUoe32z9QGUr2TfuDf39";
 
+require_once (__DIR__ . "/classes/UserAuth.php");
+
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -18,6 +20,49 @@ $query = "SELECT * FROM accommodations";
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if(isset($_SESSION['id_user'])){
+    $id_user = $_SESSION['id_user'];
+}
+
+if (isset($_POST['add_favorite'])) {
+    
+    $response = UsersAuth::addFavorite($id_user, $_POST['add_favorite']); // Reemplaza con valores dinámicos
+
+    if ($response['status'] === 'success') {
+        // Guardar el mensaje de éxito en la sesión     
+        echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: "success",
+                    title: "' . addslashes($response['message']) . '",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: "top",
+                    timerProgressBar: true
+                });
+            });
+        </script>';
+    } else {
+        echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: "error",
+                    title: "' . addslashes($response['message']) . '",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: "top",
+                    timerProgressBar: true
+                });
+            });
+        </script>';
+    }
+    $response = json_encode($response);
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +76,8 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="./assets/css/styles.css" rel="stylesheet">
     <!-- Agregando el favicon -->
     <link rel="icon" type="image/png" href="./assets/images/alojamiento.png" />
+    <!-- Sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-light">
     <?php
@@ -57,13 +104,16 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <h5 class="card-title"><?= htmlspecialchars($accommodation['name']) ?></h5>
                             <p class="card-text"><?= htmlspecialchars($accommodation['description']) ?></p>
                             <p class="text-primary fw-bold">$<?= number_format($accommodation['price'], 2) ?></p>
-                            <?php
-                                if (isset($_SESSION['id_user'])) {
-                            ?>
-                            <a href="#" class="btn btn-primary w-100">Agregar a mi cuenta</a>
-                            <?php
-                                } 
-                            ?>
+                                <?php
+                                    if (isset($_SESSION['id_user'])) {
+                                ?>                            
+                            <form method="POST">
+                                <input type="hidden" name="add_favorite" value="<?php echo $accommodation['id_accommodation'] ?>">
+                                <button class="btn btn-primary w-100" type="submit">Agregar a mi cuenta</button>
+                            </form>
+                                <?php
+                                    } 
+                                ?>
 
                         </div>
                     </div>

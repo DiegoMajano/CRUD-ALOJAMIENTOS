@@ -115,5 +115,55 @@
             return $response;
         }
 
+        public static function addFavorite($id_user, $id_accommodation) {
+
+            $conection = Connection::connect();
+
+            $sqlCheck = 'SELECT COUNT(*) as count 
+                     FROM user_accommodation 
+                     WHERE id_user = :id_user AND id_accommodation = :id_accommodation';
+
+            $stmtCheck = $conection->prepare($sqlCheck);
+            $stmtCheck->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $stmtCheck->bindParam(':id_accommodation', $id_accommodation, PDO::PARAM_INT);
+            $stmtCheck->execute();
+            $result = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+
+            if ($result['count'] > 0) {
+                return ['status' => 'error', 'message' => 'Este alojamiento ya está en favoritos'];
+            }
+
+            $sql = 'INSERT INTO user_accommodation (id_user, id_accommodation, created_at) VALUES (:id_user, :id_accommodation, CURRENT_TIMESTAMP)';
+
+            $stmt = $conection->prepare($sql);
+            $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $stmt->bindParam(':id_accommodation', $id_accommodation,PDO::PARAM_INT);
+            $response  = $stmt->execute();
+
+            if($response) {
+                return ['status' => 'success', 'message' => 'Se ha agregado a favoritos exitosamente'];
+            } else {
+                return ['status' => 'error', 'message' => 'No se ha podido agregar a favoritos'];
+            }
+        }
+
+        public static function deleteFavorite($id_user, $id_accommodation) {
+        
+            $conection = Connection::connect();
+
+            $sql = 'DELETE FROM user_accommodation WHERE id_user = :id_user AND id_accommodation = :id_accommodation ';
+            $stmt = $conection->prepare($sql);
+            $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $stmt->bindParam(':id_accommodation', $id_accommodation,PDO::PARAM_INT);
+            $response  = $stmt->execute();
+
+            if($response) {
+                return ['status' => 'success', 'message' => 'Se ha eliminado a favoritos exitosamente'];
+            } else {
+                return ['status' => 'error', 'message' => 'No se ha podido eliminar des favoritos'];
+            }
+        
+        }
+
     }
 ?>
