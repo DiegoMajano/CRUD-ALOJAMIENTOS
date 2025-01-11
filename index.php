@@ -58,7 +58,7 @@ $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <p class="card-text"><?= htmlspecialchars($accommodation['description']) ?></p>
                             <p class="text-primary fw-bold">$<?= number_format($accommodation['price'], 2) ?></p>
                             <?php
-                                if (isset($_SESSION['user_id'])) {
+                                if (isset($_SESSION['id_user'])) {
                             ?>
                             <a href="#" class="btn btn-primary w-100">Agregar a mi cuenta</a>
                             <?php
